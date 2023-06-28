@@ -2,10 +2,10 @@
 
 const productsSection = document.querySelector("section");
 
-const image1 = document.querySelector("section img:first-child");
-const image2 = document.querySelector("section img:nth-child(2)");
-const image3 = document.querySelector("section img:nth-child(3)");
-
+const image1 = document.getElementById("image1");
+const resultsButton = document.getElementById("viewResults");
+const image2 = document.getElementById("image2");
+const image3 = document.getElementById("image3");
 let clicks = 0;
 const maxClicksAllowed = 5;
 //creating an empty array that we push our list of products into later on
@@ -15,10 +15,11 @@ function randomNumberGenerator() {
   return Math.floor(Math.random() * allProducts.length);
 }
 
-function Product(name, src, timesShown) {
+function Product(name, src) {
   this.name = name;
   this.src = src;
-  this.timesShown = timesShown;
+  this.views = 0;
+  this.clicks = 0;
   allProducts.push(this);
 }
 
@@ -33,18 +34,17 @@ function renderProducts() {
     product1 === product3 ||
     product2 === product3
   ) {
-    product1 = randomNumberGenerator();
     product2 = randomNumberGenerator();
     product3 = randomNumberGenerator();
   }
   //giving attributes to image1,2,3 using the details from the images
   image1.src = allProducts[product1].src;
   image2.src = allProducts[product2].src;
-  image2.src = allProducts[product3].src;
+  image3.src = allProducts[product3].src;
   image1.alt = allProducts[product1].name;
   image2.alt = allProducts[product2].name;
   image3.alt = allProducts[product3].name;
-  //when function is run we are adding 1 to the views
+
   allProducts[product1].views++;
   allProducts[product2].views++;
   allProducts[product3].views++;
@@ -56,7 +56,7 @@ function handleProductClick(event) {
   } else {
     clicks++;
     let clickedProduct = event.target.alt;
-    for (let i = o; i < allProducts.length; i++) {
+    for (let i = 0; i < allProducts.length; i++) {
       if (clickedProduct === allProducts[i].name) {
         allProducts[i].clicks++;
         break;
@@ -74,14 +74,16 @@ function handleProductClick(event) {
 }
 
 function renderResults() {
-  let ul = document.createElement("ul");
+  let ul = document.querySelector("ul");
   for (let i = 0; i < allProducts.length; i++) {
     let li = document.createElement("li");
-    li.textContent =
-      "${allProducts[i].name} had ${allProducts[i].views} views and was clicked ${allProducts[i].clicks} times.";
+    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and was clicked ${allProducts[i].clicks} times.`;
     ul.appendChild(li);
   }
 }
+
+const banana = new Product("banana", "images/banana.jpg");
+const bag = new Product("bag", "images/banana.jpg");
 
 const productNames = [
   "bag",
@@ -105,10 +107,9 @@ const productNames = [
   "wine-glass",
 ];
 
-renderProducts();
-
 for (let i = 0; i < productNames.length; i++) {
-  new Product(productNames[i], `imgs/${productNames[i]}.jpg`);
+  new Product(productNames[i], `images/${productNames[i]}.jpg`);
 }
 
+renderProducts();
 productsSection.addEventListener("click", handleProductClick);
