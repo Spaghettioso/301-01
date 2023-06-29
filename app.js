@@ -6,6 +6,7 @@ const image1 = document.getElementById("image1");
 const resultsButton = document.getElementById("viewResults");
 const image2 = document.getElementById("image2");
 const image3 = document.getElementById("image3");
+
 let clicks = 0;
 const maxClicksAllowed = 5;
 //creating an empty array that we push our list of products into later on
@@ -65,7 +66,7 @@ function handleProductClick(event) {
     if (clicks === maxClicksAllowed) {
       productsSection.removeEventListener("click", handleProductClick);
       productsSection.className = "no-voting";
-      resultsButton.addEventListener("click", renderResults);
+      resultsButton.addEventListener("click", renderChart);
       resultsButton.className = "clicks-allowed";
     } else {
       renderProducts();
@@ -73,14 +74,14 @@ function handleProductClick(event) {
   }
 }
 
-function renderResults() {
-  let ul = document.querySelector("ul");
-  for (let i = 0; i < allProducts.length; i++) {
-    let li = document.createElement("li");
-    li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and was clicked ${allProducts[i].clicks} times.`;
-    ul.appendChild(li);
-  }
-}
+// function renderResults() {
+//   let ul = document.querySelector("ul");
+//   for (let i = 0; i < allProducts.length; i++) {
+//     let li = document.createElement("li");
+//     li.textContent = `${allProducts[i].name} had ${allProducts[i].views} views and was clicked ${allProducts[i].clicks} times.`;
+//     ul.appendChild(li);
+//   }
+// }
 
 const banana = new Product("banana", "images/banana.jpg");
 const bag = new Product("bag", "images/banana.jpg");
@@ -112,4 +113,44 @@ for (let i = 0; i < productNames.length; i++) {
 }
 
 renderProducts();
+
+function renderChart() {
+  //create 3 empty arrays for productnames on x axis and productviews and productclicks on the y axis
+  const productNames = [];
+  const productViews = [];
+  const productVotes = [];
+
+  // As we've already pushed names, views and clicks into the allProducts object array, we just need to recall these now and push all the values into the 3 arrays using a loop
+
+  for (let i = 0; i < allProducts.length; i++) {
+    productNames.push(allProducts[i].name);
+    productViews.push(allProducts[i].views);
+    productVotes.push(allProducts[i], clicks);
+    console.log(productViews);
+  }
+
+  const data = {
+    labels: productNames,
+
+    datasets: [
+      {
+        label: "Votes",
+        data: productVotes,
+        backgroundColor: "blue",
+      },
+      {
+        label: "Views",
+        data: productViews,
+      },
+    ],
+  };
+
+  const config = {
+    type: "bar",
+    data: data,
+  };
+
+  const productChart = document.getElementById("productChart");
+  const newChart = new Chart(productChart, config);
+}
 productsSection.addEventListener("click", handleProductClick);

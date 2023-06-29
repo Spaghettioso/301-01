@@ -20,17 +20,17 @@ h1 {
   height: 10%;
   border: 2px solid black;
   background-color: aqua;
-  /* justify-content: center; */
+  justify-content: center;
 }
 
 img {
-  width: 50%;
+  width: 30%;
   height: 190px;
   align-items: center;
   display: flex;
   justify-content: center;
   border: 2px solid blueviolet;
-  padding: 5px;
+  padding: 2px;
   margin: 5px;
   object-fit: contain;
 }
