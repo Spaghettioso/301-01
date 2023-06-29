@@ -93,7 +93,7 @@ const productNames = [
   "breakfast",
   "bubblegum",
   "chair",
-  "cthulu",
+  "cthulhu",
   "dog-duck",
   "dragon",
   "pen",

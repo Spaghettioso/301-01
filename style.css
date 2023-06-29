@@ -1,7 +1,49 @@
-/* * {
+* {
   box-sizing: border-box;
+  background-color: aliceblue;
 }
 
 h1 {
   text-align: center;
-} */
+  font-family: Georgia, "Times New Roman", Times, serif;
+  background-color: blanchedalmond;
+  margin: auto;
+  margin-bottom: 50px;
+  margin-top: 30px;
+  width: 30%;
+}
+
+#product {
+  display: flex;
+  margin: auto;
+  width: 60%;
+  height: 10%;
+  border: 2px solid black;
+  background-color: aqua;
+  /* justify-content: center; */
+}
+
+img {
+  width: 50%;
+  height: 190px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  border: 2px solid blueviolet;
+  padding: 5px;
+  margin: 5px;
+  object-fit: contain;
+}
+
+#viewResults {
+  margin-left: auto;
+  margin-right: auto;
+  width: 10%;
+  display: flex;
+  align-items: center;
+  border: 2px solid black;
+  margin-top: 50px;
+  text-align: center;
+  background-color: lightgrey;
+  font-weight: 700;
+}
