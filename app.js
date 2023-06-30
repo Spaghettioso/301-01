@@ -8,7 +8,7 @@ const image2 = document.getElementById("image2");
 const image3 = document.getElementById("image3");
 
 let clicks = 0;
-const maxClicksAllowed = 5;
+const maxClicksAllowed = 10;
 //creating an empty array that we push our list of products into later on
 let allProducts = [];
 
@@ -125,7 +125,7 @@ function renderChart() {
   for (let i = 0; i < allProducts.length; i++) {
     productNames.push(allProducts[i].name);
     productViews.push(allProducts[i].views);
-    productVotes.push(allProducts[i], clicks);
+    productVotes.push(allProducts[i].clicks);
     console.log(productViews);
   }
 
@@ -141,6 +141,7 @@ function renderChart() {
       {
         label: "Views",
         data: productViews,
+        backgroundColor: "red",
       },
     ],
   };
