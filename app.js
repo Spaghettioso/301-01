@@ -11,6 +11,7 @@ let clicks = 0;
 const maxClicksAllowed = 10;
 //creating an empty array that we push our list of products into later on
 let allProducts = [];
+checkLocalStorage();
 
 function randomNumberGenerator() {
   return Math.floor(Math.random() * allProducts.length);
@@ -153,5 +154,21 @@ function renderChart() {
 
   const productChart = document.getElementById("productChart");
   const newChart = new Chart(productChart, config);
+  setLocalStorage();
+}
+
+function setLocalStorage() {
+  localStorage.setItem("products", JSON.stringify(allProducts));
+}
+
+function checkLocalStorage() {
+  const localProducts = JSON.parse(localStorage.getItem("products"));
+  if (localProducts) {
+    allProducts = localProducts;
+  } else {
+    for (let i = 0; i < productNames.length; i++) {
+      new Product(productNames[i], `images/${productNames[i]}.jpg`);
+    }
+  }
 }
 productsSection.addEventListener("click", handleProductClick);
